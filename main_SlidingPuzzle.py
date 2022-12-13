@@ -3,6 +3,7 @@ import pyghelpers
 import sys
 from Constants import *
 from SceneSplash import *
+from ScenePlay import *
 
 # 3 - Initialize the world
 pygame.init()
@@ -13,7 +14,8 @@ clock = pygame.time.Clock()
 
 # 5 - Initialize variables
 # Instantiate all scenes and store them into a list
-scenesList = [SceneSplash(window)]
+scenesList = [SceneSplash(window),
+              ScenePlay(window)]
 
 # Create the Scene Manager, passing in the scenes list, and FPS
 oSceneMgr = pyghelpers.SceneMgr(scenesList, FPS)

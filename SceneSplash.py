@@ -68,13 +68,13 @@ class SceneSplash(pyghelpers.Scene):
     def handleInputs(self, eventList, keyPressedList):
         for event in eventList:
             if self.image1.handleEvent(event):
-                self.gotoScene(SCENE_PLAY, IMG_TUPLE[0])
+                self.goToScene(SCENE_PLAY, IMG_TUPLE[0])
             if self.image2.handleEvent(event):
-                self.gotoScene(SCENE_PLAY, IMG_TUPLE[1])
+                self.goToScene(SCENE_PLAY, IMG_TUPLE[1])
             if self.image3.handleEvent(event):
-                self.gotoScene(SCENE_PLAY, IMG_TUPLE[2])
+                self.goToScene(SCENE_PLAY, IMG_TUPLE[2])
             if self.image4.handleEvent(event):
-                self.gotoScene(SCENE_PLAY, IMG_TUPLE[3])
+                self.goToScene(SCENE_PLAY, IMG_TUPLE[3])
 
                 
     def update(self):
