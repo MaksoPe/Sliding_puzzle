@@ -7,7 +7,7 @@ from ScenePlay import *
 
 # 3 - Initialize the world
 pygame.init()
-window = pygame.display.set_mode((WINDOW_WIDTH_HEIGHT, WINDOW_WIDTH_HEIGHT))
+window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 clock = pygame.time.Clock()
 
 # 4 - Load assets: image(s), sounds,  etc.

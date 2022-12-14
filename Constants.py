@@ -3,7 +3,8 @@ SCENE_SPLASH = "splash scene"
 SCENE_PLAY = "play scene"
 
 #Window constants
-WINDOW_WIDTH_HEIGHT = 640
+WINDOW_WIDTH = 640
+WINDOW_HEIGHT = 700
 FPS = 30
 BIG_IMG = 600
 SMALL_IMG = 240
@@ -18,6 +19,7 @@ IMG_TUPLE = ("images/1.jpg",
 
 #Colors
 WHITE = (255, 255, 255)
+RED = (255, 0, 0)
 BLACK = (0, 0, 0)
 GRAY = (100, 100, 100)
 BACK_GRD = (0, 100, 0)

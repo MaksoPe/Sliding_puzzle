@@ -8,7 +8,7 @@ from PIL import Image
 class ScenePlay(pyghelpers.Scene):
     def __init__(self, window):
         self.window = window
-        self.SpriteImgList = {}
+        self.SpriteImgDict = {}
         #START BUTTON
         #RESTART BUTTON?
         #TIMER
@@ -19,24 +19,31 @@ class ScenePlay(pyghelpers.Scene):
         return SCENE_PLAY
 
     def enter(self, choosenImg):
-        #Process the choosen Img (slice it up)
-        large_img = Image.open(choosenImg)
-        width, height = large_img.size
-        w_pixel, h_pixel = width // N, height // N
-        #num will be the key, the PIL.Image object is the value
-        num = 1
+        large_img = pygame.image.load(choosenImg)
+        large_img = pygame.Surface.convert_alpha(large_img)
+
+	#side = Square side length in pixels
+	#N = how many puzzle pieces in each row/column
+        large_img_width = large_img.get_width()
+        side = large_img_width // N
+
+        key = 1
         for y in range(N):
             for x in range(N):
-                sprite_img = large_img.crop((x * w_pixel,
-                                             y * h_pixel,
-                                             (x+1) * w_pixel,
-                                             (y+1) * h_pixel))
+                subsurfaceRect = pygame.Rect(x*side,
+                                             y*side,
+                                             side,
+                                             side)
                 
-                self.SpriteImgList[num] = sprite_img
-                num+=1
-        #Change one object to a simple black fill, in the dict
-        #TOP - RIGHT SQUARE BLACK?!
-    
+                tile_image = large_img.subsurface(subsurfaceRect)
+		
+                oTile = pygwidgets.Image(self.window,
+                                         (20 + x * side, 20 + y * side),
+                                         tile_image)
+						       
+                self.SpriteImgDict[key] = oTile
+                key+=1
+        
     def handleInputs(self, eventsList, keysPressedList):
         for event in eventsList:
             pass
@@ -44,9 +51,9 @@ class ScenePlay(pyghelpers.Scene):
         #EMPTY IS IN THE TOUCHING CROSS, THAN SWAP IT OUT
 
     def draw(self):
-        #REDRAW THE TILES
-        #DRAW THE BUTTONS, TIMER, ETC..
-        pass
+        self.window.fill(BACK_GRD)
+        for key,value in self.SpriteImgDict.items():
+            self.SpriteImgDict[key].draw()
 
     def leave(self):
         return None
