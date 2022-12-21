@@ -1,6 +1,7 @@
 import pygwidgets
 import pyghelpers
 import pygame
+import sys
 from pygame.locals import *
 from Constants import *
 from PIL import Image
@@ -9,7 +10,20 @@ class ScenePlay(pyghelpers.Scene):
     def __init__(self, window):
         self.window = window
         self.SpriteImgDict = {}
-        #START BUTTON
+        
+        #Buttons:
+        self.MainButton = pygwidgets.CustomButton(self.window,
+                                                  (WINDOW_WIDTH - 240 - 10, WINDOW_HEIGHT - 120 - 10),
+                                                  up="images/button_main_up.png",
+                                                  over="images/button_main_over.png",
+                                                  disabled="images/button_main_disable.png")
+
+        self.StartButton = pygwidgets.CustomButton(self.window,
+                                                   (0 + 10, WINDOW_HEIGHT - 120 - 10),
+                                                   up="images/button_start_up.png",
+                                                   over="images/button_start_over.png",
+                                                   disabled="images/button_start_disable.png")
+        
         #RESTART BUTTON?
         #TIMER
         #BACKGROUND MUSIC?
@@ -38,7 +52,7 @@ class ScenePlay(pyghelpers.Scene):
                 tile_image = large_img.subsurface(subsurfaceRect)
 		
                 oTile = pygwidgets.Image(self.window,
-                                         (20 + x * side, 20 + y * side),
+                                         (70 + x * side, 35 + y * side),
                                          tile_image)
 						       
                 self.SpriteImgDict[key] = oTile
@@ -46,12 +60,21 @@ class ScenePlay(pyghelpers.Scene):
         
     def handleInputs(self, eventsList, keysPressedList):
         for event in eventsList:
-            pass
+            if ((event.type == QUIT) or
+                ((event.type == KEYDOWN) and (event.key == K_ESCAPE))):
+                pygame.quit()
+                sys.exit()
+            if self.MainButton.handleEvent(event):
+                self.goToScene(SCENE_SPLASH)
+            if self.StartButton.handleEvent(event):
+                self.goToScene(SCENE_PLAY, IMG_TUPLE[0])
         #HERE CHECK WHICH ONE IS CLICKED AND IF THE
         #EMPTY IS IN THE TOUCHING CROSS, THAN SWAP IT OUT
 
     def draw(self):
         self.window.fill(BACK_GRD)
+        self.MainButton.draw()
+        self.StartButton.draw()
         for key,value in self.SpriteImgDict.items():
             self.SpriteImgDict[key].draw()
 

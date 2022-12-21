@@ -5,14 +5,11 @@ from Constants import *
 from SceneSplash import *
 from ScenePlay import *
 
-# 3 - Initialize the world
+#Initialize the world
 pygame.init()
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 clock = pygame.time.Clock()
 
-# 4 - Load assets: image(s), sounds,  etc.
-
-# 5 - Initialize variables
 # Instantiate all scenes and store them into a list
 scenesList = [SceneSplash(window),
               ScenePlay(window)]
